@@ -24,4 +24,8 @@ app.use(handlerbars.notFount);
 
 app.use(handlerbars.serverError);
 
-app.listen(port, () => console.log(`Express started on port:${port}`));
+if (require.main === module) {
+  app.listen(port, () => console.log(`Express started on port:${port}`));
+} else {
+  module.exports = app;
+}
