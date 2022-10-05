@@ -1,4 +1,4 @@
-const fortune = require("./lib/fortune");
+const fortune = require("../ch05/lib/fortune");
 const express = require("express");
 const expressHandlebars = require("express-handlebars");
 const app = express();
