@@ -21,12 +21,16 @@ app.engine(
 app.set("view engine", "handlebars");
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.get("/newsletter-signup", handlers.newsletterSignup);
 
 app.post("/newsletter-signup/process", handlers.newsletterSignupProcess);
 
 app.get("/newsletter-signup/thank-you", handlers.newsletterSignupThankYou);
+
+app.get("/newsletter", handlers.newsletter);
+app.get("/api/newsletter-signup", handlers.api.newsletterSignup);
 
 const port = process.env.PORT || 3000;
 
