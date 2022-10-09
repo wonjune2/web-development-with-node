@@ -28,3 +28,21 @@ exports.api = {
     res.send({ resutl: "success" });
   },
 };
+
+exports.vacationPhotoContestProcess = (req, res, fields, files) => {
+  console.log("field data: ", fields);
+  console.log("files:", files);
+  res.redirect(303, "/contest/vacation-photo-thank-you");
+};
+
+exports.vacationPhotoContest = (req, res) => {
+  const now = new Date();
+  res.render("contest/vacation-photo", {
+    year: now.getFullYear(),
+    month: now.getFullYear(),
+  });
+};
+
+exports.vacationPhotoContestThankYou = (req, res) => {
+  res.render("contest/vacation-photo-thank-you");
+};
