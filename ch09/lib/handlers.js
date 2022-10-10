@@ -1,3 +1,9 @@
+exports.home = (req, res) => {
+  res.cookie("monster", "nom  nom");
+  res.cookie("signed_monster", "nom nom", { signed: true });
+  res.render("home");
+};
+
 exports.newsletterSignup = (req, res) => {
   // CSRF에 대해서는 나중에 알아봅니다. 지금은 일단 더미 값만 넣어 둡니다.
   res.render("newsletter-signup", { csrf: "CSRF token goes here" });

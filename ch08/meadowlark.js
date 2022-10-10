@@ -34,6 +34,23 @@ app.get("/newsletter", handlers.newsletter);
 app.get("/api/newsletter-signup", handlers.api.newsletterSignup);
 
 app.get("/contest/vacation-photo", handlers.vacationPhotoContest);
+
+app.get(
+  "/contest/vacation-photo-thank-you",
+  handlers.vacationPhotoContestThankYou
+);
+
+app.get("/contest/vacation-photo-ajax", handlers.vacationPhotoContestAjax);
+app.post("/api/vacation-photo-contest/:year/:month", (req, res) => {
+  console.log("api!!!!!");
+  const form = new multiparty.Form();
+  form.parse(req, (err, fields, files) => {
+    if (err)
+      return handlers.api.vacationPhotoContestError(req, res, err.message);
+    handlers.api.vacationPhotoContest(req, res, fields, files);
+  });
+});
+
 app.post("/contest/vacation-photo/:year/:month", (req, res) => {
   const form = new multiparty.Form();
   form.parse(req, (err, fields, files) => {
@@ -41,11 +58,6 @@ app.post("/contest/vacation-photo/:year/:month", (req, res) => {
     handlers.vacationPhotoContestProcess(req, res, fields, files);
   });
 });
-
-app.get(
-  "/contest/vacation-photo-thank-you",
-  handlers.vacationPhotoContestThankYou
-);
 const port = process.env.PORT || 3000;
 
 app.listen(port, () =>
