@@ -39,12 +39,21 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get("/", handlers.home);
+// router
+app.use((req, res, next) => {
+  console.log(`processing request for ${req.url}...`);
+  next();
+});
 
-app.get("/newsletter-signup", handlers.newsletterSignup);
-app.post("/newsletter", handlers.newsletterSignupProcess);
-app.get("/newsletter-signup/thank-you", handlers.newsletterSignupThankYou);
-app.get("/newsletter-archive", handlers.newsletterSignupThankYou);
+app.use((req, res, next) => {
+  console.log("terminating request");
+  res.send("thanks for playing!");
+});
+
+app.use((req, res, next) => {
+  console.log(`whoops, i'll never  get called!`);
+});
+//
 
 app.use((req, res) => {
   res.render("404");
